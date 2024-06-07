@@ -1,0 +1,17 @@
+{% extends "base/crud.html" %}
+
+{% block title_content %}
+Edit Rack
+{% endblock %}
+
+{% block header_content %}
+Edit Rack - {{ rack.name }}
+{% endblock %}
+
+{% block form_action %}
+{% url 'rack.edit' rack.id %}
+{% endblock %}
+
+{% block back_link %}
+{% url 'rack.index' %}
+{% endblock %}

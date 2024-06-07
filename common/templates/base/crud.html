@@ -15,11 +15,15 @@
                 <a href="{% block back_link %}{% endblock %}" class="btn btn-danger">Back</a>
             </div>
 
+            {% if show_form|default:"True" %}
             <form method="post" action="{% block form_action %}{% endblock %}">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>
+            {% endif %}
+
+            {% block additional_content %}{% endblock %}
         </div>
     </div>
 </div>

@@ -1,0 +1,35 @@
+{% extends "base/index.html" %}
+
+{% block title_content %}
+Racks Items
+{% endblock %}
+
+{% block header_content %}
+Rack Items : {{ rack.name }}
+{% endblock %}
+
+{% block create_link %}
+{% url 'rack_item.create' %}
+{% endblock %}
+
+{% block table_head %}
+<tr>
+    <th>Name</th>
+    <th>Rack Units</th>
+</tr>
+{% endblock %}
+
+{% block table_body %}
+{% for rack_item in rack_items %}
+<tr>
+    <td>{{ rack_item.name }}</td>
+    <td>{{ rack_item.rack_units }}</td>
+    <td>
+        <a href="{% url 'rack_item.edit' rack_item.id %}">Edit</a>
+    </td>
+    <td>
+        <a href="{% url 'rack_item.delete' rack_item.id %}">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}

@@ -20,11 +20,12 @@ Devices
     <th>VLAN</th>
     <th>Wifi Network</th>
     <th>Connection</th>
+    <th>Device Type</th>
 </tr>
 {% endblock %}
 
 {% block table_body %}
-{% for device in devices %}
+{% for device in client_devices %}
 <tr>
     <td>{{ device.name }}</td>
     <td>{{ device.mac_address }}</td>
@@ -32,11 +33,30 @@ Devices
     <td>{{ device.vlan }}</td>
     <td>{{ device.wifi.ssid }}</td>
     <td>{{ device.connection_type }}</td>
+    <td>Client</td>
     <td>
-        <a href="{% url 'device.edit' device.id %}">Edit</a>
+        <a href="{% url 'client_device.edit' device.id %}">Edit</a>
     </td>
     <td>
-        <a href="{% url 'device.delete' device.id %}">Delete</a>
+        <a href="{% url 'client_device.delete' device.id %}">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+{% for device in network_devices %}
+<tr>
+    <td>{{ device.name }}</td>
+    <td>{{ device.mac_address }}</td>
+    <td>{{ device.ip_address }}</td>
+    <td>{{ device.vlan }}</td>
+    <td>{{ device.wifi.ssid }}</td>
+    <td>{{ device.connection_type }}</td>
+    <td>Network</td>
+    <td>{{ device.device_type }}</td>
+    <td>
+        <a href="{% url 'network_device.edit' device.id %}">Edit</a>
+    </td>
+    <td>
+        <a href="{% url 'network_device.delete' device.id %}">Delete</a>
     </td>
 </tr>
 {% endfor %}

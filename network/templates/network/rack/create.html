@@ -1,0 +1,17 @@
+{% extends "base/crud.html" %}
+
+{% block title_content %}
+Create Rack
+{% endblock %}
+
+{% block header_content %}
+Create Rack
+{% endblock %}
+
+{% block form_action %}
+{% url 'rack.create' %}
+{% endblock %}
+
+{% block back_link %}
+{% url 'rack.index' %}
+{% endblock %}

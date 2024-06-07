@@ -1,5 +1,7 @@
 {% extends "base/crud.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block title_content %}
 Create Device
 {% endblock %}
@@ -8,10 +10,46 @@ Create Device
 Create Device
 {% endblock %}
 
-{% block form_action %}
-{% url 'device.create' %}
-{% endblock %}
-
 {% block back_link %}
 {% url 'device.index' %}
+{% endblock %}
+
+{% block additional_content %}
+<br>
+Device Type:
+<input type="radio" id="clientRadio" name="formSwitch" checked>
+<label for="clientRadio">Client</label>
+<input type="radio" id="networkRadio" name="formSwitch">
+<label for="networkRadio">Network</label>
+<br>
+
+<form id="clientForm" method="post" style="display: block;">
+    {% csrf_token %}
+    {{ client_form|crispy }}
+    <input type="hidden" name="client">
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<form id="networkForm" method="post" style="display: none;">
+    {% csrf_token %}
+    {{ network_form|crispy }}
+    <input type="hidden" name="network">
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<script>
+    document.getElementById('clientRadio').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('clientForm').style.display = 'block';
+            document.getElementById('networkForm').style.display = 'none';
+        }
+    });
+
+    document.getElementById('networkRadio').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('clientForm').style.display = 'none';
+            document.getElementById('networkForm').style.display = 'block';
+        }
+    });
+</script>
 {% endblock %}
